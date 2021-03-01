@@ -43,7 +43,7 @@ namespace sip {
 		SipHeader() {};
 		SipHeader(string name, string h);
 		~SipHeader();
-		string operator=(string s) throw(SipException);
+		string operator=(string s);
 		virtual string to_string() { return name + constHeader::kvoperator + header; };
 	};
 

@@ -22,13 +22,13 @@
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{DA2AE50B-3907-4DC7-9B61-09874D09CA84}</ProjectGuid>
     <RootNamespace>sipsdk</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -70,16 +70,20 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetExt>.dll</TargetExt>
+    <TargetExt>.lib</TargetExt>
+    <OutDir>$(ProjectDir)$(Configuration)\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <CompileAs>CompileAsCpp</CompileAs>
-      <PreprocessorDefinitions>SIPSDK_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SIPSDK_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <CallingConvention>Cdecl</CallingConvention>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <ImportLibrary>$(OutDir)s$(TargetName).lib</ImportLibrary>
@@ -156,14 +160,18 @@
     <ClInclude Include="SdpVersion.h" />
     <ClInclude Include="SessionDescription.h" />
     <ClInclude Include="SipBase.h" />
+    <ClInclude Include="SipCancel.h" />
     <ClInclude Include="SipHeader.h" />
+    <ClInclude Include="SipOk.h" />
     <ClInclude Include="SipRequest.h" />
     <ClInclude Include="Sequence.h" />
     <ClInclude Include="Sip.h" />
     <ClInclude Include="SipResponse.h" />
+    <ClInclude Include="SipSProgress.h" />
     <ClInclude Include="SipString.h" />
     <ClInclude Include="SipException.h" />
     <ClInclude Include="sipsdk.h" />
+    <ClInclude Include="SipTry.h" />
     <ClInclude Include="SipUri.h" />
     <ClInclude Include="Subscribe.h" />
     <ClInclude Include="To.h" />
@@ -194,9 +202,13 @@
     <ClCompile Include="Sequence.cpp" />
     <ClCompile Include="SessionDescription.cpp" />
     <ClCompile Include="Sip.cpp" />
+    <ClCompile Include="SipCancel.cpp" />
     <ClCompile Include="SipException.cpp" />
     <ClCompile Include="SipHeader.cpp" />
+    <ClCompile Include="SipOk.cpp" />
     <ClCompile Include="SipResponse.cpp" />
+    <ClCompile Include="SipSProgress.cpp" />
+    <ClCompile Include="SipTry.cpp" />
     <ClCompile Include="SipUri.cpp" />
     <ClCompile Include="Subscribe.cpp" />
     <ClCompile Include="To.cpp" />

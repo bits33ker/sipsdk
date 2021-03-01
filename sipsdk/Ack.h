@@ -1,4 +1,5 @@
 #pragma once
+#include "Sip.h"
 #include "Request.h"
 
 namespace sip {

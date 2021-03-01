@@ -77,6 +77,7 @@ namespace sip {
 
 	SipUri::~SipUri()
 	{
+		headers.clear();
 	}
 
 	string SipUri::to_string()

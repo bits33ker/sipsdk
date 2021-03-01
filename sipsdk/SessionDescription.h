@@ -33,5 +33,6 @@ namespace sip {
 		~SessionDescription();
 
 		virtual string to_string();
+		SipString *getMedia();
 	};
 };

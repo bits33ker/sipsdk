@@ -11,7 +11,7 @@ namespace sip {
 	{
 
 	public:
-		string operator=(string f)throw(SipException);
+		string operator=(string f);
 		virtual Uri *getSipUri() = 0;
 		virtual void add(string h) = 0;
 	};

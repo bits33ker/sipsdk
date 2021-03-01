@@ -105,8 +105,26 @@ namespace sip {
 		size_t pos = value.find(":");
 		string param = value.substr(0, pos);
 		string v = value.substr(pos + 1, value.length() - pos - 1);
-		if (param != "rtpmap") return new SdpHeader("a", value);
+		if (param != "rtpmap") return new SdpHeader("a", value);//dtmf telephone
 		return new MediaCodec(v);
+	}
+	void MediaDescription::selectCodec(int c)
+	{
+		codecs = ::to_string(c);
+		list<SipString *>::iterator it = header.begin();
+		while (it != header.end())
+		{
+			if (dynamic_cast<MediaCodec *>(*it) != NULL)
+			{
+				MediaCodec * codec = (MediaCodec *)*it++;
+				if (codec->getCodec() != c)
+				{
+					header.remove(codec);
+				}
+			}
+			else
+				it++;
+		}
 	}
 	SipString * MediaDescription::checkAttributes(string & value)
 	{

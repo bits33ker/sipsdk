@@ -13,7 +13,7 @@
 #include "Sequence.h"
 
 namespace sip {
-	Sip * Sip::buildMessage(string text)throw(SipException)
+	Sip * Sip::buildMessage(string text)
 	{
 		size_t pos = text.find_first_of(da);
 		string sline = text.substr(0, pos);
@@ -41,19 +41,20 @@ namespace sip {
 		if (offset2 == string::npos)
 			offset2 = sline.length();
 		string uri = sline.substr(offset + 1, offset2 - offset - 1);
-		if (method == "INVITE") return (Sip *)new Invite(uri, sheader, sbody);
-		if (method == "BYE") return (Sip *)new Bye(uri, sheader, sbody);
-		if (method == "ACK") return (Sip *)new Ack(uri, sheader, sbody);
-		if (method == "REGISTER") return (Sip *)new Register(uri, sheader, sbody);
-		if (method == "OPTIONS") return (Sip *)new Options(uri, sheader, sbody);
-		if (method == "SUBSCRIBE") return (Sip *)new Subscribe(uri, sheader, sbody);
+		if (method == methods::INVITE) return (Sip *)new Invite(uri, sheader, sbody);
+		if (method == methods::BYE) return (Sip *)new Bye(uri, sheader, sbody);
+		if (method == methods::ACK) return (Sip *)new Ack(uri, sheader, sbody);
+		if (method == methods::REGISTER) return (Sip *)new Register(uri, sheader, sbody);
+		if (method == methods::OPTIONS) return (Sip *)new Options(uri, sheader, sbody);
+		if (method == methods::SUBSCRIBE) return (Sip *)new Subscribe(uri, sheader, sbody);
 
 		throw SipException("Exception Method: " + method + " not implemented yet");
 	}
 	Sip::Sip(string sheader, string sbody)
 	{
+		header.clear();
+		sdps.clear();
 		header = splitHeader(sheader);
-		//body = split(sbody, "=");
 		if(sbody!="")
 			sdps.insert(sdps.end(), new SessionDescription(sbody));
 	}
@@ -62,7 +63,7 @@ namespace sip {
 		SipRequest *request = (SipRequest *)new Invite("5409@192.168.40.34", "", "");
 		return request;
 	}
-	std::map<string, string> Sip::split(const string & text, const string kvoperator)
+	std::map<string, string> Sip::split(string & text, const string kvoperator)
 	{
 		std::map<string, string> results;
 
@@ -92,7 +93,8 @@ namespace sip {
 			{
 				string key(key_value_pair.begin(), key_value_pair.begin() + equals_index);
 				string value(key_value_pair.begin() + equals_index + kvoperator.length(), key_value_pair.end());
-				results[key] = value;
+				//results[key] = value;
+				results.insert(pair<string, string>(key, value));
 			}
 		}
 
@@ -141,7 +143,8 @@ namespace sip {
 			{
 				string key(key_value_pair.begin(), key_value_pair.begin() + equals_index);
 				string value(key_value_pair.begin() + equals_index + constHeader::kvoperator.length(), key_value_pair.end());
-				results[key] = buildHeaders(key, value);
+				//results[key] = buildHeaders(key, value);
+				results.insert(pair<string, SipString *>(key, buildHeaders(key, value)));
 			}
 		}
 
@@ -150,9 +153,19 @@ namespace sip {
 
 	Sip::~Sip()
 	{
-		header.clear();
+		
+		while (header.size()) {
+			string key = header.begin()->first;
+			header.erase(key);
+		}
 		//body.clear();
-		sdps.clear();
+		while (sdps.size())
+		{
+			SessionDescription * sdp = NULL;
+			sdp = *sdps.begin();
+			sdps.remove(sdp);
+			delete sdp;
+		}
 	}
 	string Sip::header_compose(string arg)
 	{
@@ -190,6 +203,12 @@ namespace sip {
 		if (base != NULL) return base->to_string() + da;
 		return "";
 	}
+	string Sip::mustHeader(string hdr)
+	{
+		SipString *base = header[hdr];
+		if (base != NULL) return base->to_string() + da;
+		throw SipException(hdr + "is missing");
+	}
 	HeaderContact * Sip::getFrom()
 	{
 		return (HeaderContact *)header[constHeader::fromHeader];
@@ -209,11 +228,11 @@ namespace sip {
 	string Sip::to_string()
 	{
 		string result = "";// sline + sip::da;
-		result += header[constHeader::viaHeader]->to_string() + da;
-		result += header[constHeader::fromHeader]->to_string() + da;
-		result += header[constHeader::toHeader]->to_string() + da;
-		result += header[constHeader::callidHeader]->to_string() + da;
-		result += header[constHeader::seqHeader]->to_string() + da;
+		result += mustHeader(constHeader::viaHeader);
+		result += mustHeader(constHeader::fromHeader);
+		result += mustHeader(constHeader::toHeader);
+		result += mustHeader(constHeader::callidHeader);
+		result += mustHeader(constHeader::seqHeader);
 		//optionals from here
 		result += optionalHeader(constHeader::contactHeader);
 		result += optionalHeader(constHeader::forwardsHeader);
@@ -231,7 +250,7 @@ namespace sip {
 		result += optionalHeader("P-Mitrol-idLlamada");
 		result += optionalHeader("P-Mitrol-PerfilRuteo");
 		result += optionalHeader(constHeader::reasonHeader);
-		result += header[constHeader::lenHeader]->to_string() + da;
+		result += mustHeader(constHeader::lenHeader);
 		result += optionalHeader(constHeader::typeHeader);
 		result += da;
 		if (sdps.size() > 0)
@@ -246,4 +265,10 @@ namespace sip {
 
 		return result;
 	}
+	string Sip::getSessionDescription()
+	{
+		if (!sdps.size()) return "";
+		return (*sdps.begin())->to_string();
+	}
+
 }

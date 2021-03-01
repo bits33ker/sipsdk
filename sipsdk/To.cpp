@@ -32,7 +32,7 @@ namespace sip {
 
 		return result;
 	}
-	string To::operator=(string t)throw(SipException)
+	string To::operator=(string t)
 	{
 		//To: <sip:8036@192.168.41.245>
 		headers.clear();

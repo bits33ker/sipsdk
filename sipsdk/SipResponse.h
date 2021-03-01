@@ -2,8 +2,8 @@
 #include "Sip.h"
 namespace sip {
 	class SipResponse :
-		public Sip, 
-		public SipString
+		public Sip 
+		//public SipString
 	{
 		int imethod;
 		string method;
@@ -12,5 +12,6 @@ namespace sip {
 		virtual string to_string();
 
 		virtual SipBase * clone();
+		virtual bool isRequest();
 	};
 };

@@ -13,18 +13,26 @@
 #include "sipsdk.h"
 using namespace std;
 namespace sip{
-	
+	namespace methods {
+		const string INVITE = "INVITE";
+		const string REGISTER = "REGISTER";
+		const string BYE = "BYE";
+		const string OPTIONS = "OPTIONS";
+		const string SUBSCRIBE = "SUBSCRIBE";
+		const string ACK = "ACK";
+	};
+
 	class SIPSDK SipRequest;
 
 	class SIPSDK Sip : public SipBase, SipString
 	{
 		//string sline;//request o status
-		std::map<string, string> Sip::split(const string & text, const string kvoperator);
+		std::map<string, string> split(string & text, const string kvoperator);
 		std::map<string, SipString *> splitHeader(const string & text);
 		string header_compose(string arg);
 		//string body_compose(string arg);
-		SipString *buildHeaders(string name, string content);
 		string optionalHeader(string hdr);
+		string mustHeader(string hdr);
 
 	protected:
 		map<string, SipString *> header;
@@ -35,7 +43,8 @@ namespace sip{
 		Sip(string sheader, string sbody);
 		~Sip();
 
-		static Sip * buildMessage(string text)throw(SipException);
+		static Sip * buildMessage(string text);
+		static SipString *buildHeaders(string name, string content);
 		SipRequest *buildRequest();
 		virtual string to_string();
 
@@ -43,6 +52,7 @@ namespace sip{
 		virtual HeaderContact * getTo();
 		virtual Via * getVia();
 		virtual SipString * getHeader(string c);
+		string getSessionDescription();
 	};
 };
 #endif

@@ -26,5 +26,7 @@ namespace sip {
 		~MediaDescription();
 
 		virtual string to_string();
+		string getCodecs() { return codecs; };
+		void selectCodec(int c);
 	};
 };

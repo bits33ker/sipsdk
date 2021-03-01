@@ -45,14 +45,14 @@ namespace SipTest
 				llamada + ruteo + length + type;
 			//linea += sdp + media + codecs + codecs2 + dtmf;
 
-			sip::Sip *s = (sip::Sip *)new sip::Sip(linea);
+			sip::Sip *s = sip::Sip::buildMessage(linea);
 			string result = s->to_string();// << endl;
 			
 			//voy comparando linea a linea
-			size_t ar = 0;
-			size_t al = 0;
-			size_t pr = result.find_first_of(da);
-			size_t pl = linea.find_first_of(da);
+			int ar = 0;
+			int al = 0;
+			int pr = result.find_first_of(da);
+			int pl = linea.find_first_of(da);
 			while (pr >= 0 && pl >= 0)
 			{
 				string sr = result.substr(ar, pr-ar);
@@ -95,7 +95,7 @@ namespace SipTest
 			string linea = request + via + from + to + callid + seq + contact + allow + length + type;
 			//linea += sdp + media + codecs;
 
-			sip::Sip *s = (sip::Sip *)new sip::Sip(linea);
+			sip::Sip *s = sip::Sip::buildMessage(linea);
 			string result = s->to_string();// << endl;
 			int c = linea.compare(result);
 			if (c != 0)
@@ -117,7 +117,7 @@ namespace SipTest
 			string content = "Content - Length : 0\r\n\r\n";
 			string linea = ack + via + from + to + callid + seq + max + uagent + content;
 
-			sip::Sip *s = (sip::Sip *)new sip::Sip(linea);
+			sip::Sip *s = sip::Sip::buildMessage(linea);
 			//sip::SipRequest *req = s->buildRequest();
 			string result = s->to_string();// << endl;
 			Assert::AreEqual(result, linea);

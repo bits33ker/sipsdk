@@ -20,7 +20,7 @@ namespace sip {
 		~To();
 
 		virtual string to_string();
-		virtual string operator=(string t)throw(SipException);
+		virtual string operator=(string t);
 		virtual Uri * getSipUri() { return uri; };
 		virtual void add(string h) { headers.insert(headers.end(), h); };
 	};

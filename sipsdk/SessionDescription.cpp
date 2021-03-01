@@ -22,6 +22,7 @@ namespace sip {
 
 	SessionDescription::~SessionDescription()
 	{
+		header.clear();
 	}
 
 	std::map<string, SipString *> SessionDescription::split(const string & text)
@@ -85,4 +86,9 @@ namespace sip {
 
 		return result;
 	}
+	SipString *SessionDescription::getMedia()
+	{
+		return header[constSdp::sdpMedia];
+	}
+
 }

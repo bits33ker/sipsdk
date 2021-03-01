@@ -13,14 +13,20 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Archivos de código fuente\Methods">
-      <UniqueIdentifier>{ecd43466-04e6-4f00-b920-796dcff86dd3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Archivos de encabezado\Methods">
-      <UniqueIdentifier>{e7cff228-adee-4cb6-b682-f218705b05bc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Archivos de encabezado\Interfaces">
       <UniqueIdentifier>{a4d97d7c-78d6-42ae-8d1f-6406da264354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Requests">
+      <UniqueIdentifier>{e7cff228-adee-4cb6-b682-f218705b05bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Requests">
+      <UniqueIdentifier>{ecd43466-04e6-4f00-b920-796dcff86dd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de código fuente\Responses">
+      <UniqueIdentifier>{d4711aea-7458-4a4c-bef4-c4046f71ad8b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Archivos de encabezado\Responses">
+      <UniqueIdentifier>{b59620fb-5661-4ebb-a73f-12a57c1b8e51}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +61,7 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Invite.h">
-      <Filter>Archivos de encabezado\Methods</Filter>
+      <Filter>Archivos de encabezado\Requests</Filter>
     </ClInclude>
     <ClInclude Include="SipUri.h">
       <Filter>Archivos de encabezado</Filter>
@@ -105,9 +111,6 @@
     <ClInclude Include="MediaCodec.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="SipResponse.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="Bye.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
@@ -130,6 +133,21 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="Subscribe.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="SipResponse.h">
+      <Filter>Archivos de encabezado\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="SipTry.h">
+      <Filter>Archivos de encabezado\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="SipOk.h">
+      <Filter>Archivos de encabezado\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="SipSProgress.h">
+      <Filter>Archivos de encabezado\Responses</Filter>
+    </ClInclude>
+    <ClInclude Include="SipCancel.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
@@ -165,7 +183,7 @@
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
     <ClCompile Include="Invite.cpp">
-      <Filter>Archivos de código fuente\Methods</Filter>
+      <Filter>Archivos de código fuente\Requests</Filter>
     </ClCompile>
     <ClCompile Include="SipUri.cpp">
       <Filter>Archivos de código fuente</Filter>
@@ -203,25 +221,37 @@
     <ClCompile Include="MediaCodec.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
-    <ClCompile Include="SipResponse.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="Bye.cpp">
-      <Filter>Archivos de código fuente\Methods</Filter>
+      <Filter>Archivos de código fuente\Requests</Filter>
     </ClCompile>
     <ClCompile Include="Ack.cpp">
-      <Filter>Archivos de código fuente\Methods</Filter>
+      <Filter>Archivos de código fuente\Requests</Filter>
     </ClCompile>
     <ClCompile Include="Request.cpp">
-      <Filter>Archivos de código fuente\Methods</Filter>
+      <Filter>Archivos de código fuente\Requests</Filter>
     </ClCompile>
     <ClCompile Include="Register.cpp">
-      <Filter>Archivos de código fuente\Methods</Filter>
+      <Filter>Archivos de código fuente\Requests</Filter>
     </ClCompile>
     <ClCompile Include="Options.cpp">
-      <Filter>Archivos de código fuente\Methods</Filter>
+      <Filter>Archivos de código fuente\Requests</Filter>
     </ClCompile>
     <ClCompile Include="Subscribe.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
+    <ClCompile Include="SipResponse.cpp">
+      <Filter>Archivos de código fuente\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="SipTry.cpp">
+      <Filter>Archivos de código fuente\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="SipOk.cpp">
+      <Filter>Archivos de código fuente\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="SipSProgress.cpp">
+      <Filter>Archivos de código fuente\Responses</Filter>
+    </ClCompile>
+    <ClCompile Include="SipCancel.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>

@@ -20,4 +20,8 @@ namespace sip {
 		result += Sip::to_string();
 		return result;
 	}
+	bool SipResponse::isRequest()
+	{
+		return false;
+	}
 }

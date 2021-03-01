@@ -5,6 +5,6 @@ namespace sip{
 	Invite::Invite(string suri, string sheader, string sbody)
 		:Request(suri, sheader, sbody)
 	{
-		method = "INVITE";
+		method = methods::INVITE;
 	}
 }

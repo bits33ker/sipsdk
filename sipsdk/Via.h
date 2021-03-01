@@ -22,7 +22,7 @@ namespace sip {
 		Via(string v);
 		~Via();
 		virtual string to_string();
-		string operator=(string v)throw(SipException);
+		string operator=(string v);
 
 		Uri * getUri() { return uri; };
 	};

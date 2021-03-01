@@ -12,7 +12,7 @@ namespace sip {
 	SipHeader::~SipHeader()
 	{
 	}
-	string SipHeader::operator=(string s)throw(SipException)
+	string SipHeader::operator=(string s)
 	{
 		size_t pos = s.find(constHeader::kvoperator);
 		if (pos == string::npos)

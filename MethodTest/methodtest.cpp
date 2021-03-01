@@ -21,7 +21,7 @@ namespace methodtest
 {		
 	TEST_CLASS(MethodTest)
 	{
-		void test(string linea, string result)throw(SipException)
+		void test(string linea, string result)
 		{
 			size_t ar = 0;
 			size_t al = 0;

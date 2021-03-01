@@ -37,7 +37,7 @@ namespace sip {
 		return result;
 
 	}
-	string From::operator=(string f)throw(SipException)
+	string From::operator=(string f)
 	{
 		//From: "John Doe" <sip:5409@192.168.41.230>;tag=296737002
 		headers.clear();
