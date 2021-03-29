@@ -1,5 +1,5 @@
 #pragma once
-#include "sip.h"
+#include "Sip.h"
 #include "Uri.h"
 #include "SipException.h"
 #include "HeaderContact.h"

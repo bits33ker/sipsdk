@@ -24,7 +24,7 @@ namespace sip {
 
 		return result;
 	}
-	string Via::operator=(string v)throw(SipException)
+	string Via::operator=(string v)
 	{
 		//Via: SIP/2.0/UDP 192.168.41.230:11121;rport;branch=z9hG4bKddsEurK4164f00.sa12088ptb7Rm
 		size_t pos = v.find_last_of(" ");
